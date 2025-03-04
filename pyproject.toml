@@ -6,14 +6,20 @@ build-backend = "setuptools.build_meta"
 name = "cv_to_role_analyzer"
 version = "0.1.0"
 description = "Analyzes CVs against job descriptions."
-authors = [{name = "Your Name", email = "your.email@example.com"}]
 dependencies = [
     "click",
-    "google-generativeai",
+    "google-genai",
     "python-dotenv",
     "pytest",
     "pypdf"
 ]
 
+[tool.setuptools]
+packages = ["cv_to_role_analyzer"]
+package-dir = {"" = "src"}
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[project.scripts]
+cv-analyzer = "cv_to_role_analyzer.cv_analyzer:analyze_cli"
