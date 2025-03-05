@@ -7,7 +7,7 @@ from cv_to_role_analyzer.cv_analyzer import CVAnalyzer
 
 def test_system_analyze_core(mocker):
     """
-    System test for the core functionality of the `analyze_core` function in the `cv_analyzer` module.
+    System test for the core functionality of the `analyze_core` function in the `CVAnalyzer` class.
 
     This system test evaluates the end-to-end workflow of the application, orchestrated by the `analyze_core`
     function. It ensures that the core functionality of processing CV and job role text is working as expected.

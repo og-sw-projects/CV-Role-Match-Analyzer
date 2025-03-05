@@ -1,6 +1,5 @@
 import pytest
-import json
-from cv_to_role_analyzer.cv_analyzer import CVAnalyzer
+from cv_to_role_analyzer.llm import LLMClient
 
 
 @pytest.mark.parametrize(
@@ -50,13 +49,13 @@ from cv_to_role_analyzer.cv_analyzer import CVAnalyzer
         ),
     ],
 )
-def test_analyze_core(mocker, mock_response, cv_text, role_text, raises_exception, exception_message):
+def test_analyze_match(mocker, mock_response, cv_text, role_text, raises_exception, exception_message):
     """
-    Unit test for the `analyze_core` function in the `cv_analyzer` module.
+    Unit test for the `analyze_match` function in the `LLMClient` class.
 
-    This test checks various scenarios of analyzing a CV and job role text:
-    1. Successful analysis with valid responses.
-    2. Handling of exceptions when the `LLMClient.analyze_match` raises an error.
+    This test checks various scenarios of matching CV and job role text:
+    1. Successful match with valid responses.
+    2. Handling of exceptions when `LLMClient.analyze_match` raises an error.
 
     Args:
         mocker (pytest_mock.MockerFixture): Fixture to mock functions for testing.
@@ -73,11 +72,10 @@ def test_analyze_core(mocker, mock_response, cv_text, role_text, raises_exceptio
         # Mocking LLMClient to raise an exception
         mocker.patch("cv_to_role_analyzer.llm.LLMClient.analyze_match", side_effect=Exception(exception_message))
         with pytest.raises(Exception, match=exception_message):
-            CVAnalyzer.analyze_core(cv_text, role_text)
+            LLMClient.analyze_match(cv_text, role_text)
     else:
         # Mocking LLMClient to return a mock response
         mocker.patch("cv_to_role_analyzer.llm.LLMClient.analyze_match", return_value=mock_response)
-        # Call the analyze_core function and assert the result
-        report_json = CVAnalyzer.analyze_core(cv_text, role_text)
-        report = json.loads(report_json)
-        assert report == mock_response
+        # Call the analyze_match function and assert the result
+        result = LLMClient.analyze_match(cv_text, role_text)
+        assert result == mock_response
