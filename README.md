@@ -33,25 +33,82 @@ This tool is beneficial for:
 
 ## Installation Guide
 
-Step-by-step instructions to install dependencies and set up the project. TODO
+#### Prerequisites
+- Python 3.8+
+- pip (Python package manager)
+- A Gemini API Key (Instructions for obtaining provided below)
 
+#### Obtaining a Gemini API Key
+1. Visit https://ai.google.dev/gemini-api/docs/api-key
+2. Click "Get a Gemini API key in Google AI Studio"
+3. Click "Create API Key"
+4. Copy the generated key
+5. Prepare to use the key in your project setup
+
+#### Installation
+1. Clone the Repository
 ```bash
-# Example installation steps TODO
-git clone <repository-url>
-cd <project-directory>
-pip install -r requirements.txt
+git clone https://github.com/og-sw-projects/CV-to-Role-Match-Analyzer.git
+cd CV-to-Role-Match-Analyzer
+```
+2. Create a Virtual Environment
+```bash
+# On Windows
+python -m venv venv
+venv\Scripts\activate
+
+# On macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
+3. Install Dependencies
+```bash
+pip install .
 ```
 
-Ensure the guide is clear and glitch-free. TODO
+4. Set Up API Key
 
-## Usage Examples
-
-Provide usage instructions with examples, including sample inputs and expected outputs. TODO
-
+You have two options for providing the Gemini API key:
+Option A: Using a `.env` File
+Create a `.env` file in the project root directory:
 ```bash
-# Example command to run the project TODO
-python main.py --input sample.pdf --output results.json
+GEMINI_API_KEY=your_api_key_here
 ```
+
+Option B: Operating System Environment Variable
+Set the environment variable directly in your operating system:
+Windows (Command Prompt):
+```bash
+set GOOGLE_API_KEY=your_api_key_here
+```
+Windows (PowerShell):
+```bash
+$env:GOOGLE_API_KEY="your_api_key_here"
+```
+macOS/Linux:
+```bash
+export GOOGLE_API_KEY=your_api_key_here
+```
+
+## Usage Example
+
+#### Sample input files are provided in the `samples/` directory:
+- `samples/sample_cv.pdf`: A synthetic CV for testing
+- `samples/sample_role.txt`: A sample job description
+
+#### Example usage with sample files:
+```bash
+# Analyze a CV against a job description
+cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt
+
+# Analyze with an output directory to store the results as .json
+cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --output-dir ./analysis_results
+
+# Analyze with verbose output
+cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --verbose 2
+```
+
+
 
 ## Requirements Engineering
 
