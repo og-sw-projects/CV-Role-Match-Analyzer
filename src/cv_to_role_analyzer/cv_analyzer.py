@@ -33,7 +33,7 @@ def analyze_core(cv_text, role_text):
     "--role", required=True, help="Path to the job role text file."
 )
 @click.option(
-    "--output-dir", help="Path to the output directory (optional)."
+    "--output-dir", default="analysis_results", help="Path to the output directory (optional)."
 )
 @click.option(
     "--verbose", type=click.IntRange(0, 2), default=1,
