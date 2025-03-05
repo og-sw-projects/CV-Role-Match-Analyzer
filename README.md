@@ -172,7 +172,7 @@ The project is divided into two main areas of responsibility:
 - Analysis and LLM Integration: This area focuses on integrating with the LLM API, developing the analysis algorithms, and generating the final report.
 
 Both team members share responsibility for code review, documentation, integration testing, and performance optimization.
-#### [Architecture LLM Interactions Documentation](./chats/architecture_LLM_chats.txt)
+#### [Architecture LLM Interactions Documentation](./chats/architecture_LLM_interactions.txt)
 
 ## Project Phases - Design
 #### CRC Description of Key Classes:
