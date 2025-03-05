@@ -100,9 +100,10 @@ class LLMClient:
         try:
             # Load environment variables from .env file and get API key from environment
             load_dotenv()
-            api_key = os.getenv("API_KEY")
+            api_key = os.getenv("GEMINI_API_KEY")
             if not api_key:
-                raise ValueError("API_KEY environment variable not set. Please check your environment configuration.")
+                raise ValueError("GEMINI_API_KEY environment variable not set. Please check your environment "
+                                 "configuration.")
 
             # Initialize Gemini client and generate content
             client = Client(api_key=api_key)
@@ -125,7 +126,7 @@ class LLMClient:
         except json.JSONDecodeError as e:
             click.echo(f"Error decoding JSON response: {e}. The response may be not in the expected format.", err=True)
         except ValueError as e:
-            click.echo(f"Environment Error: {e}. Please ensure your API_KEY is correctly set in your environment.",
+            click.echo(f"Environment Error: {e}. Please ensure your GEMINI_API_KEY is correctly set in your environment.",
                        err=True)
         except Exception as e:  # Catch other potential errors (e.g., network issues)
             click.echo(f"An unexpected error occurred: {e}. Please check your network or API configuration.", err=True)
