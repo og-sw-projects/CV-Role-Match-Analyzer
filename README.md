@@ -131,7 +131,7 @@ cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --verbose 2
   - AC2: Consistent scoring (±10% variance for same inputs).
 - **Skill Gap Identification**
   - AC3: 90% accuracy in identifying critical gaps.
-#### [LLM Interaction Documentation](./chats/requirements_engineering_LLM_interactions.txt)
+#### [Requirements Engineering LLM Interactions Documentation](./chats/requirements_engineering_LLM_interactions.txt)
 
 ## Architecture
 #### Command-line Interface Specification
@@ -159,11 +159,12 @@ The system interacts with files in the following manner:
 
 #### Third-Party Libraries
 The system leverages third-party libraries for specific functionalities:
-- PDF processing and text extraction.
-- Data structuring and analysis.
-- Large Language Model (LLM) API integration.
-- Command-line interface management.
-- Data validation.
+- `click` - Command-line interface management.
+- `google-genai` - Large Language Model (LLM) API integration.
+- `python-dotenv` - Environment variables management.
+- `pytest` - Testing
+- `pytest-mock` - Mock for testing
+- `pypdf` - PDF processing and text extraction.
 
 #### Team Member Responsibilities
 The project is divided into two main areas of responsibility:
@@ -171,61 +172,69 @@ The project is divided into two main areas of responsibility:
 - Analysis and LLM Integration: This area focuses on integrating with the LLM API, developing the analysis algorithms, and generating the final report.
 
 Both team members share responsibility for code review, documentation, integration testing, and performance optimization.
-#### [LLM Interaction Documentation](./chats/architecture_LLM_chats.txt)
+#### [Architecture LLM Interactions Documentation](./chats/architecture_LLM_chats.txt)
 
 ## Design
 #### CRC Description of Key Classes:
 - **CVAnalyzer**
   - *Responsibilities*
-    - Coordinates the overall analysis process
-    - Extracts text from CV PDFs
-    - Processes role descriptions
-    - Generates match analysis reports
-    - Manages LLM interactions for analysis
+    - Perform the core analysis of a CV against a job description.
+    - Process input files and orchestrate the application workflow via the CLI.
+    - Handle file I/O for saving analysis reports in JSON format.
   - *Collaborators*
-    - AnalysisReport
-    - SkillGap
-    - LLM Client (external)
-    - PDF Processor (external)
+    - LLMClient: Used for analyzing the match between the CV and the job description.
+    - RoleProcessor: Used to process the job description file.
+    - PDFProcessor: Used to extract text from the CV (PDF).
+    - AnalysisReport: Used to generate and format the analysis result into a JSON string.
+- **LLMClient**
+  - *Responsibilities*
+    - Interact with the Gemini API to analyze the CV and job description match.
+    - Generate optimized prompts for the LLM and handle responses.
+    - Refine prompts and responses if initial results are incomplete.
+  - *Collaborators*
+    - None
 - **AnalysisReport**
   - *Responsibilities*
-    - Holds analysis results (match score, gaps, recommendations)
-    - Converts analysis data to JSON format
-    - Validates score ranges (0-100)
-    - Maintains structured representation of analysis results
+    - Represents the results of a CV and job description analysis.
+    - Store and format the match score, skill gaps, and recommendations.
+    - Convert the analysis data into a JSON string.
   - *Collaborators*
-    - SkillGap
-    - JSON library (external)
-- **SkillGap**
+    - None
+- **RoleProcessor**
   - *Responsibilities*
-    - Represents a single identified skill gap
-    - Stores gap category and description
-    - Associates gap with importance level (critical/important/nice-to-have)
+    - Process the job role description text from a file.
   - *Collaborators*
-    - SkillGapType
-- **SkillGapType**
+    - None
+- **PDFProcessor**
   - *Responsibilities*
-    - Defines valid gap importance levels
-    - Ensures type safety for gap classifications
-    - Provides string representation of gap types
+    - Extract text from a PDF file (CV).
   - *Collaborators*
-    - None (Pure enumeration)
-#### [LLM Interaction Documentation](./chats/design_LLM_interactions.txt)
+    - None
+- **AnalysisRequest**
+  - *Responsibilities*
+    - Validate the existence of the CV and job description files.
+    - Process the input files into a dictionary format.
+  - *Collaborators*
+    - None
+
+#### [Design LLM Interactions Documentation](./chats/design_LLM_interactions.txt)
 
 ## Coding & Testing
 
 ### Coding
-- **Code Quality:** Adherence to clean coding practices and PEP 8.
-- **Project File Structure:**
   
 | File Name | Description |
 |-----------|-------------|
-| `main.py` | Entry point for the project |
-| `utils.py` | Utility functions |
-| `config.json` | Configuration settings |
+| `cv_analyzer.py` | ontains the core logic for analyzing CVs and job descriptions, orchestrating the overall flow of analysis, and managing the command-line interface using Click. |
+| `llm.py` | Manages the interaction with the Gemini API for analyzing the match between the CV and job description using an LLM-based approach. |
+| `report.py` | Responsible for formatting and outputting the analysis results in a structured format (e.g., JSON), representing the CV-job description match. |
+| `utils.py` | Contains helper functions for tasks like file handling, text extraction, and other common operations that support the core functionality. |
+| `validation.py` | Validates the input paths (CV and job description files), ensuring that files exist and are in the correct format before analysis. |
 
 ### Testing
-- **Automated Unit Test:** (Inline description & link to test file)
-- **System-level Functional Test:** (Inline description & link to test file)
-- [LLM Interaction Documentation](link-to-llm-docs)
+- **Automated Unit Test** [test_analyze_match.py](./tests/unit/test_analyze_match.py): A unit test for the `analyze_match` function in the `LLMClient` class. This test checks various scenarios of matching CV and job role text including successful match with valid responses and handling of exceptions when `LLMClient.analyze_match` raises an error.
+
+- **System-level Functional Test** [test_system.py](./tests/system/test_system.py): A system test for the core functionality of the `analyze_core` function in the `CVAnalyzer` class. This system test evaluates the end-to-end workflow of the application, orchestrated by the `analyze_core` function. It ensures that the core functionality of processing CV and job role text is working as expected.
+
+#### [Testing LLM Interactions Documentation](./chats/testing_LLM_interactions.txt)
 
