@@ -7,7 +7,7 @@ The core functionality of the CV-to-Role Match Analyzer revolves around comparin
 The output JSON file includes the following key information:
 
 *   **Numerical Match Score (0-100):** A quantitative measure representing the overall compatibility between the CV and the job description.  A higher score indicates a better match.
-*   **Categorized Skill Gaps:** Identification of specific skills and qualifications mentioned in the job description that are missing or underrepresented in the CV. These gaps are categorized for clarity (Education, Work Experience, Skills, Certifications).
+*   **Categorized Skill Gaps:** Identification of specific skills and qualifications mentioned in the job description that are missing or underrepresented in the CV.
 *   **Specific Improvement Recommendations:**  Actionable suggestions for the candidate to improve their CV and better align it with the target role.  These recommendations might include highlighting relevant projects, acquiring new skills, or rephrasing existing experience.
 
 #### Key Features
@@ -29,7 +29,7 @@ This tool is beneficial for:
 #### Technical Stack
 
 *   Programming Language: Python
-*   Libraries/Frameworks: PyPDF2, Pandas
+*   Libraries/Frameworks: click, google-genai, python-dotenv, pytest, pypdf
 
 ## Installation Guide
 
@@ -103,34 +103,17 @@ cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --output-dir ./analysi
 cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --verbose 2
 ```
 
-
-
-## Requirements Engineering
+## Project Phases - Requirements Engineering
 
 #### Functional Feature Requirements:
 - **Input Processing (Functional Suitability - Functional Completeness)**
   - FR1.1: The system shall accept PDF format CVs as input files up to 10MB in size.
   - FR1.2: The system shall accept role descriptions as text input up to 2000 characters.
   - FR1.3: The system shall successfully extract text from PDF CVs with 100% text content preservation.
-- **Analysis Processing (Functional Suitability - Functional Appropriateness)**
-  - FR2.1: The system shall extract and categorize CV components into:
-    - Education (degrees, institutions, dates).
-    - Work experience (roles, companies, dates, responsibilities).
-    - Skills (technical, soft skills).
-    - Certifications.
-  - FR2.2: The system shall identify from role descriptions:
-    - Required education.
-    - Required experience level.
-    - Required skills (minimum 80% accuracy).
-    - Required certifications.
 - **Matching Analysis (Functional Suitability - Functional Correctness)**
-  - FR3.1: The system shall generate a numerical match score (0-100).
-  - FR3.2: The system shall identify all skill gaps and categorize them as:
-    - Critical (required but missing).
-    - Important (preferred but missing).
-    - Nice-to-have (mentioned but missing).
+  - FR2.1: The system shall generate a numerical match score (0-100).
 - **Output Generation (Functional Suitability - Functional Completeness)**
-  - FR4.1: The system shall generate a JSON report containing:
+  - FR3.1: The system shall generate a JSON report containing:
     - Overall match score.
     - Categorized skill gaps.
     - Specific improvement recommendations.
@@ -145,7 +128,7 @@ cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --verbose 2
 - **PDF Processing**
   - AC1: Complete text extraction with preserved formatting for PDFs of sizes 1KB to 10MB.
 - **Match Score Accuracy**
-  - AC2: Consistent scoring (±5% variance for same inputs).
+  - AC2: Consistent scoring (±10% variance for same inputs).
 - **Skill Gap Identification**
   - AC3: 90% accuracy in identifying critical gaps.
 #### [LLM Interaction Documentation](./chats/requirements_engineering_LLM_interactions.txt)
