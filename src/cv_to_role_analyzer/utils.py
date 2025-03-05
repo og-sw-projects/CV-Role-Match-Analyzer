@@ -1,4 +1,5 @@
 import pypdf
+import click
 
 
 class RoleProcessor:
@@ -28,10 +29,10 @@ class RoleProcessor:
             with open(role_path, "r", encoding="utf-8") as file:
                 return file.read().strip()
         except FileNotFoundError:
-            print(f"Error: The file at {role_path} was not found.")
+            click.echo(f"Error: The file at {role_path} was not found.")
             return None
         except IOError as e:
-            print(f"Error reading the file {role_path}: {e}")
+            click.echo(f"Error reading the file {role_path}: {e}")
             return None
 
 
@@ -67,8 +68,8 @@ class PDFProcessor:
                         text.append(page_text)
                 return " ".join(text) if text else None
         except FileNotFoundError:
-            print(f"Error: The PDF file at {pdf_path} was not found.")
+            click.echo(f"Error: The PDF file at {pdf_path} was not found.")
             return None
         except IOError as e:
-            print(f"Error reading the PDF file {pdf_path}: {e}")
+            click.echo(f"Error reading the PDF file {pdf_path}: {e}")
             return None

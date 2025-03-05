@@ -22,4 +22,4 @@ package-dir = {"" = "src"}
 testpaths = ["tests"]
 
 [project.scripts]
-cv-analyzer = "cv_to_role_analyzer.cv_analyzer:analyze_cli"
+cv-analyzer = "cv_to_role_analyzer.cv_analyzer:CVAnalyzer.analyze_cli"

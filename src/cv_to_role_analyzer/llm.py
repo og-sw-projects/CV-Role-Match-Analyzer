@@ -48,8 +48,13 @@ class LLMClient:
         response = LLMClient._call_llm_api(prompt)
 
         # If response lacks required fields, retry with a refined prompt
-        if not response or "match_score" not in response:
+        if not response or not {"match_score", "skill_gap", "recommendations"}.issubset(response.keys()):
             response = LLMClient._call_llm_api(LLMClient._refine_prompt(prompt, response))
+            return response
+
+        if len(response["skill_gap"]) > 0 and len(response["recommendations"]) == 0:
+            response = LLMClient._call_llm_api(LLMClient._refine_prompt(prompt, response))
+            return response
 
         return response
 
@@ -126,8 +131,8 @@ class LLMClient:
         except json.JSONDecodeError as e:
             click.echo(f"Error decoding JSON response: {e}. The response may be not in the expected format.", err=True)
         except ValueError as e:
-            click.echo(f"Environment Error: {e}. Please ensure your GEMINI_API_KEY is correctly set in your environment.",
-                       err=True)
+            click.echo(f"Environment Error: {e}. Please ensure your GEMINI_API_KEY is correctly set in your "
+                       f"environment.", err=True)
         except Exception as e:  # Catch other potential errors (e.g., network issues)
             click.echo(f"An unexpected error occurred: {e}. Please check your network or API configuration.", err=True)
 
