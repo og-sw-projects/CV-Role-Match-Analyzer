@@ -2,7 +2,7 @@ import json
 import os
 
 import pytest
-from cv_to_role_analyzer.cv_analyzer import analyze_core
+from cv_to_role_analyzer.cv_analyzer import CVAnalyzer
 
 
 def test_system_analyze_core(mocker):
@@ -46,7 +46,7 @@ def test_system_analyze_core(mocker):
         role_text = f.read()
 
     # Call the analyze_core function and get the resulting report in JSON format
-    report_json = analyze_core(cv_text, role_text)  # Call analyze_core directly
+    report_json = CVAnalyzer.analyze_core(cv_text, role_text)  # Call analyze_core directly
     report = json.loads(report_json)
 
     # Assert that the returned report matches the mock response
@@ -57,4 +57,4 @@ def test_system_analyze_core(mocker):
 
     # Assert that an exception is raised when analyze_match fails
     with pytest.raises(Exception, match="LLM Error"):
-        analyze_core(cv_text, role_text)
+        CVAnalyzer.analyze_core(cv_text, role_text)

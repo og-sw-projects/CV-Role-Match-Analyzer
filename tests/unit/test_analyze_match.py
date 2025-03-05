@@ -1,6 +1,6 @@
 import pytest
 import json
-from cv_to_role_analyzer.cv_analyzer import analyze_core
+from cv_to_role_analyzer.cv_analyzer import CVAnalyzer
 
 
 @pytest.mark.parametrize(
@@ -73,11 +73,11 @@ def test_analyze_core(mocker, mock_response, cv_text, role_text, raises_exceptio
         # Mocking LLMClient to raise an exception
         mocker.patch("cv_to_role_analyzer.llm.LLMClient.analyze_match", side_effect=Exception(exception_message))
         with pytest.raises(Exception, match=exception_message):
-            analyze_core(cv_text, role_text)
+            CVAnalyzer.analyze_core(cv_text, role_text)
     else:
         # Mocking LLMClient to return a mock response
         mocker.patch("cv_to_role_analyzer.llm.LLMClient.analyze_match", return_value=mock_response)
         # Call the analyze_core function and assert the result
-        report_json = analyze_core(cv_text, role_text)
+        report_json = CVAnalyzer.analyze_core(cv_text, role_text)
         report = json.loads(report_json)
         assert report == mock_response
