@@ -133,7 +133,7 @@ cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --verbose 2
   - AC3: 90% accuracy in identifying critical gaps.
 #### [Requirements Engineering LLM Interactions Documentation](./chats/requirements_engineering_LLM_interactions.txt)
 
-## Architecture
+## Projet Phases - Architecture
 #### Command-line Interface Specification
 ```bash
 # Main analysis command
@@ -174,7 +174,7 @@ The project is divided into two main areas of responsibility:
 Both team members share responsibility for code review, documentation, integration testing, and performance optimization.
 #### [Architecture LLM Interactions Documentation](./chats/architecture_LLM_chats.txt)
 
-## Design
+## Project Phases - Design
 #### CRC Description of Key Classes:
 - **CVAnalyzer**
   - *Responsibilities*
@@ -219,7 +219,7 @@ Both team members share responsibility for code review, documentation, integrati
 
 #### [Design LLM Interactions Documentation](./chats/design_LLM_interactions.txt)
 
-## Coding & Testing
+## Project Phases - Coding & Testing
 
 ### Coding
   
