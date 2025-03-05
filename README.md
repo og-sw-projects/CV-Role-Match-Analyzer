@@ -69,27 +69,22 @@ pip install .
 4. Set Up API Key
 
 You have two options for providing the Gemini API key:
-Option A: Using a `.env` File
-Create a `.env` file in the project root directory:
+- *Option A*: Create a `.env` file in the project root directory:
 ```bash
 GEMINI_API_KEY=your_api_key_here
 ```
 
-Option B: Operating System Environment Variable
-Set the environment variable directly in your operating system:
-Windows (Command Prompt):
+- *Option B*: Set the environment variable directly in your operating system:
 ```bash
+# If on Windows Command Prompt
 set GOOGLE_API_KEY=your_api_key_here
-```
-Windows (PowerShell):
-```bash
+
+# If on Windows PowerShell
 $env:GOOGLE_API_KEY="your_api_key_here"
-```
-macOS/Linux:
-```bash
+
+# If on macOS/Linux
 export GOOGLE_API_KEY=your_api_key_here
 ```
-
 ## Usage
 
 #### Sample input files are provided in the [samples/](./samples) directory:
