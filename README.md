@@ -90,11 +90,11 @@ macOS/Linux:
 export GOOGLE_API_KEY=your_api_key_here
 ```
 
-## Usage Example
+## Usage
 
-#### Sample input files are provided in the `samples/` directory:
-- `samples/sample_cv.pdf`: A synthetic CV for testing
-- `samples/sample_role.txt`: A sample job description
+#### Sample input files are provided in the [samples/](./samples) directory:
+- [samples/sample_cv.pdf](./samples/sample_cv.pdf): A synthetic CV for testing
+- [samples/sample_role.txt](./samples/sample_role.txt): A sample job description
 
 #### Example usage with sample files:
 ```bash
