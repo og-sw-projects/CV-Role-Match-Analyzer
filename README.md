@@ -94,13 +94,13 @@ export GOOGLE_API_KEY=your_api_key_here
 #### Example usage with sample files:
 ```bash
 # Analyze a CV against a job description
-cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt
+cv-analyzer --cv samples/sample_cv.pdf --role samples/sample_role.txt
 
 # Analyze with an output directory to store the results as .json
-cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --output-dir ./analysis_results
+cv-analyzer --cv samples/sample_cv.pdf --role samples/sample_role.txt --output-dir ./analysis_results
 
 # Analyze with verbose output
-cv-analyzer --cv ./sample_cv.pdf --role ./sample_role.txt --verbose 2
+cv-analyzer --cv samples/sample_cv.pdf --role samples/sample_role.txt --verbose 2
 ```
 
 ## Project Phases - Requirements Engineering
