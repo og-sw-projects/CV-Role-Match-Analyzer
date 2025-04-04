@@ -1,8 +1,8 @@
-# CV-to-Role Match Analyzer
+# CV-Role Match Analyzer
 
 ## Project Overview
 
-The core functionality of the CV-to-Role Match Analyzer revolves around comparing the skills and qualifications presented in a CV with the requirements outlined in a job description.  This comparison goes beyond simple keyword matching and aims to provide a more nuanced understanding of the candidate's fit.
+The core functionality of the CV-Role Match Analyzer revolves around comparing the skills and qualifications presented in a CV with the requirements outlined in a job description.  This comparison goes beyond simple keyword matching and aims to provide a more nuanced understanding of the candidate's fit.
 
 The output JSON file includes the following key information:
 
@@ -48,8 +48,8 @@ This tool is beneficial for:
 #### Installation
 1. Clone the Repository
 ```bash
-git clone https://github.com/og-sw-projects/CV-to-Role-Match-Analyzer.git
-cd CV-to-Role-Match-Analyzer
+git clone https://github.com/og-sw-projects/CV-Role-Match-Analyzer.git
+cd CV-Role-Match-Analyzer
 ```
 2. Create a Virtual Environment
 ```bash
